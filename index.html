@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirill Sofronov — Python Backend Developer</title>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'ks-bg': '#080c12','ks-alt': '#060a0f','ks-card': '#0d1320',
+            'ks-border': '#1b2236','ks-accent': '#3ddba8','ks-amber': '#e8a830',
+            'ks-text': '#dde2ec','ks-muted': '#627088','ks-dim': '#2d3a4f',
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+  <style>
+    :root{--bg:#080c12;--bg-alt:#060a0f;--card:#0d1320;--border:#1b2236;--accent:#3ddba8;--accent-glow:rgba(61,219,168,0.09);--amber:#e8a830;--text:#dde2ec;--muted:#627088;--dim:#2d3a4f;}
+    *,*::before,*::after{box-sizing:border-box;}
+    html{background:var(--bg);}
+    body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+    .mono{font-family:'JetBrains Mono',monospace;}
+    .dot-grid{background-image:radial-gradient(circle,rgba(61,219,168,0.11) 1px,transparent 1px);background-size:30px 30px;}
+    .nav-glass{background:rgba(8,12,18,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+    .nav-link{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+    .nav-link:hover{color:var(--accent);}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border:1px solid var(--accent);border-radius:6px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:13px;text-decoration:none;transition:all 0.2s;}
+    .btn-primary:hover{background:var(--accent);color:var(--bg);box-shadow:0 0 24px rgba(61,219,168,0.28);}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:13px;text-decoration:none;transition:color 0.2s;}
+    .btn-ghost:hover{color:var(--text);}
+    .glass-card{background:var(--card);border:1px solid var(--border);border-radius:10px;transition:border-color 0.25s;}
+    .glass-card:hover{border-color:rgba(61,219,168,0.35);}
+    .tag{display:inline-block;padding:3px 11px;background:rgba(61,219,168,0.07);border:1px solid rgba(61,219,168,0.2);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);white-space:nowrap;}
+    .term-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color 0.25s,transform 0.25s;}
+    .term-card:hover{border-color:rgba(61,219,168,0.5);transform:translateY(-4px);}
+    .term-hdr{background:#101725;padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);}
+    .mac-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+    .term-body{padding:24px;}
+    .tl-track{position:relative;padding-left:36px;}
+    .tl-track::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border);}
+    .tl-item{position:relative;padding-bottom:44px;}
+    .tl-item:last-child{padding-bottom:0;}
+    .tl-dot{position:absolute;left:-43px;top:6px;width:14px;height:14px;border-radius:50%;border:2px solid var(--bg);}
+    .bullet{color:var(--accent);flex-shrink:0;}
+    .lang-track{height:3px;background:var(--border);border-radius:2px;margin-top:5px;overflow:hidden;}
+    .lang-fill{height:100%;background:var(--accent);border-radius:2px;}
+    .sr{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease;}
+    .sr.in{opacity:1;transform:none;}
+    #typewriter::after{content:'|';animation:blink 1s step-start infinite;color:var(--accent);}
+    @keyframes blink{50%{opacity:0;}}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:8px;}
+    .prompt{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+    .prompt::before{content:'$ ';color:var(--accent);}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--bg);}
+    ::-webkit-scrollbar-thumb{background:var(--dim);border-radius:3px;}
+    .lang-switcher{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:3px;}
+    .lang-btn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 9px;border-radius:4px;transition:all 0.18s;letter-spacing:0.04em;}
+    .lang-btn:hover{color:var(--text);}
+    .lang-btn.active{background:var(--accent);color:var(--bg);font-weight:600;}
+    @media(prefers-reduced-motion:reduce){.sr,.term-card,.glass-card{transition:none!important;}#typewriter::after{animation:none;}}
+  </style>
+</head>
+<body>
+
+<nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#about" class="mono font-bold text-lg tracking-tighter" style="color:var(--text);text-decoration:none">
+      KS<span style="color:var(--accent)">.dev</span>
+    </a>
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#about"      class="nav-link" data-i18n="nav_about">/about</a>
+      <a href="#skills"     class="nav-link" data-i18n="nav_skills">/skills</a>
+      <a href="#experience" class="nav-link" data-i18n="nav_experience">/experience</a>
+      <a href="#projects"   class="nav-link" data-i18n="nav_projects">/projects</a>
+      <a href="#education"  class="nav-link" data-i18n="nav_education">/education</a>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" data-lang="it" onclick="setLang('it')">IT</button>
+    </div>
+  </div>
+</nav>
+
+<section id="about" class="dot-grid min-h-screen flex items-center px-6 pt-20" style="position:relative">
+  <div style="position:absolute;top:50%;left:-80px;width:560px;height:560px;background:radial-gradient(circle,rgba(61,219,168,0.055) 0%,transparent 68%);transform:translateY(-50%);pointer-events:none"></div>
+  <div class="max-w-5xl mx-auto w-full grid lg:grid-cols-[1fr_300px] gap-12 lg:gap-16 items-center" style="position:relative;z-index:1">
+    <div>
+      <p class="mono mb-5" style="font-size:13px;color:var(--muted)" data-i18n="hero_terminal">~ $ whoami</p>
+      <h1 class="font-bold tracking-tight" style="font-size:clamp(2.8rem,8vw,5.6rem);line-height:1.05;color:var(--text);margin-bottom:16px">Kirill Sofronov.</h1>
+      <h2 class="font-semibold" style="font-size:clamp(1.3rem,3.5vw,2rem);color:var(--muted);margin-bottom:32px;min-height:2.8rem">
+        <span id="typewriter" style="color:var(--text)"></span>
+      </h2>
+      <p id="hero-bio" style="max-width:580px;font-size:17px;line-height:1.75;color:var(--muted);margin-bottom:40px">
+        Backend Python developer building production REST APIs, microservices, and LLM integrations. Former Head of Sales — I bridge the gap between business requirements and clean code. Based in <span style="color:var(--text)">Pavia, Italy.</span>
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="mailto:sofronovk2006@gmail.com" class="btn-primary">
+          <i data-feather="mail" style="width:15px;height:15px"></i>
+          <span data-i18n="hero_contact">contact me</span>
+        </a>
+        <a href="https://github.com/DimondoAgent" target="_blank" class="btn-ghost">
+          <i data-feather="github" style="width:15px;height:15px"></i> GitHub
+        </a>
+      </div>
+    </div>
+    <div class="order-first lg:order-last">
+      <div class="term-card" style="max-width:280px;margin:0 auto;box-shadow:0 0 60px rgba(61,219,168,0.07)">
+        <div class="term-hdr">
+          <span class="mac-dot" style="background:#ff5f57"></span>
+          <span class="mac-dot" style="background:#febc2e"></span>
+          <span class="mac-dot" style="background:#28c840"></span>
+          <span class="mono" style="font-size:12px;color:var(--muted);margin-left:8px">avatar.jpg</span>
+        </div>
+        <img src="ССЫЛКА_НА_ТВОЕ_ФОТО" alt="Kirill Sofronov" style="display:block;width:100%;height:auto">
+        <div style="padding:13px 18px;border-top:1px solid var(--border);display:flex;align-items:center;gap:9px">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);flex-shrink:0;animation:pulse 2.4s ease-in-out infinite"></span>
+          <span class="mono" style="font-size:12px;color:var(--muted)" data-i18n="hero_status">status: open to new projects</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="sr px-6 py-24" style="background:var(--bg-alt)">
+  <div class="max-w-5xl mx-auto">
+    <p class="eyebrow" data-i18n="skills_eyebrow">$ cat tech_stack.json</p>
+    <h2 class="font-bold text-3xl mb-10" style="color:var(--text)" data-i18n="skills_title">Technical Arsenal</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="glass-card p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <i data-feather="code" style="color:var(--accent);width:17px;height:17px"></i>
+          <span class="font-semibold" style="color:var(--text)" data-i18n="skills_backend">Backend</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Django 5</span><span class="tag">DRF</span><span class="tag">Flask</span>
+        </div>
+      </div>
+      <div class="glass-card p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <i data-feather="database" style="color:var(--accent);width:17px;height:17px"></i>
+          <span class="font-semibold" style="color:var(--text)" data-i18n="skills_databases">Databases</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <span class="tag">PostgreSQL</span><span class="tag">SQLite</span><span class="tag">Firebase Realtime DB</span>
+        </div>
+      </div>
+      <div class="glass-card p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <i data-feather="shield" style="color:var(--accent);width:17px;height:17px"></i>
+          <span class="font-semibold" style="color:var(--text)" data-i18n="skills_auth">Auth &amp; Security</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <span class="tag">JWT / PyJWT</span><span class="tag">bcrypt</span><span class="tag">Session Auth</span>
+        </div>
+      </div>
+      <div class="glass-card p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <i data-feather="cpu" style="color:var(--accent);width:17px;height:17px"></i>
+          <span class="font-semibold" style="color:var(--text)" data-i18n="skills_ai">AI &amp; Async</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <span class="tag">Gemini API</span><span class="tag">Aiogram 3</span><span class="tag">aiohttp</span><span class="tag">PyMuPDF</span><span class="tag">Pydantic v2</span>
+        </div>
+      </div>
+      <div class="glass-card p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <i data-feather="server" style="color:var(--accent);width:17px;height:17px"></i>
+          <span class="font-semibold" style="color:var(--text)" data-i18n="skills_infra">Infrastructure</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <span class="tag">Docker</span><span class="tag">Git / GitHub</span><span class="tag">Uvicorn</span><span class="tag">WSGI</span><span class="tag">Onrender</span>
+        </div>
+      </div>
+      <div class="glass-card p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <i data-feather="layers" style="color:var(--accent);width:17px;height:17px"></i>
+          <span class="font-semibold" style="color:var(--text)" data-i18n="skills_concepts">Concepts &amp; Business</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <span class="tag">REST API</span><span class="tag">Microservices</span><span class="tag">OOP / MVC</span><span class="tag">Data Pipelines</span><span class="tag">CRM Automation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="sr px-6 py-24" style="background:var(--bg)">
+  <div class="max-w-5xl mx-auto">
+    <p class="eyebrow" data-i18n="exp_eyebrow">$ git log --oneline career</p>
+    <h2 class="font-bold text-3xl mb-10" style="color:var(--text)" data-i18n="exp_title">Work Experience</h2>
+    <div class="tl-track">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--accent)"></div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px">
+          <h3 class="font-bold text-xl" style="color:var(--text)" data-i18n="exp1_title">Freelance Backend Developer</h3>
+          <span class="mono px-3 py-1 rounded" style="font-size:11px;background:var(--accent-glow);color:var(--accent);border:1px solid rgba(61,219,168,0.2);white-space:nowrap">2025 — 2026</span>
+        </div>
+        <p class="mono mb-4" style="font-size:12px;color:var(--muted)" data-i18n="exp1_company">Maele Source · Freelance B2B · Italy</p>
+        <ul style="list-style:none;padding:0;color:var(--muted);font-size:15px;line-height:1.65">
+          <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="exp1_b1">Designed and built a production Flask web app for a B2B trading client sourcing goods across Europe.</span></li>
+          <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="exp1_b2">Implemented Jinja2 templating, SQLite database, and WSGI configuration; deployed live to Onrender.</span></li>
+          <li style="display:flex;gap:9px"><span class="bullet">▸</span><span data-i18n="exp1_b3">Delivered the full project independently — from architecture design to production deployment.</span></li>
+        </ul>
+        <div style="display:flex;gap:20px;margin-top:14px;flex-wrap:wrap">
+          <a href="https://maele-source.onrender.com" target="_blank" class="mono" style="font-size:12px;color:var(--accent);text-decoration:none" data-i18n="exp1_live">↗ Live App</a>
+          <a href="project.html?id=maele-source" class="mono" style="font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color=\'var(--text)\'" onmouseout="this.style.color=\'var(--muted)\'" data-i18n="exp1_details">View Details →</a>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--dim)"></div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px">
+          <h3 class="font-bold text-xl" style="color:var(--text)" data-i18n="exp2_title">Python Automation Engineer</h3>
+          <span class="mono px-3 py-1 rounded" style="font-size:11px;background:rgba(100,112,136,.1);color:var(--muted);white-space:nowrap">2024</span>
+        </div>
+        <p class="mono mb-4" style="font-size:12px;color:var(--muted)" data-i18n="exp2_company">Logistics Data Solutions · Freelance / Contract</p>
+        <ul style="list-style:none;padding:0;color:var(--muted);font-size:15px;line-height:1.65">
+          <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="exp2_b1">Engineered a Python data extraction pipeline to process and parse unstructured logistics feeds.</span></li>
+          <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="exp2_b2">Built a pattern-recognition engine identifying sea container codes — eliminated 100% of manual entry.</span></li>
+          <li style="display:flex;gap:9px"><span class="bullet">▸</span><span data-i18n="exp2_b3">Designed a scalable three-layer architecture for independent data parsing, validation, and output.</span></li>
+        </ul>
+        <a href="project.html?id=logistics-pipeline" class="mono" style="font-size:12px;color:var(--muted);text-decoration:none;display:inline-block;margin-top:14px;transition:color .2s" onmouseover="this.style.color=\'var(--text)\'" onmouseout="this.style.color=\'var(--muted)\'" data-i18n="exp2_details">View Details →</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--dim)"></div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px">
+          <h3 class="font-bold text-xl" style="color:var(--text)" data-i18n="exp3_title">Technical Assistant / Ops Coordinator</h3>
+          <span class="mono px-3 py-1 rounded" style="font-size:11px;background:rgba(100,112,136,.1);color:var(--muted);white-space:nowrap">2024</span>
+        </div>
+        <p class="mono mb-4" style="font-size:12px;color:var(--muted)" data-i18n="exp3_company">University Admissions Company · Russia</p>
+        <ul style="list-style:none;padding:0;color:var(--muted);font-size:15px;line-height:1.65">
+          <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="exp3_b1">Developed Python scripts to automate routine admin tasks, data collection, and report generation.</span></li>
+          <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="exp3_b2">Parsed, cleaned, and structured data from raw documents to populate internal databases.</span></li>
+          <li style="display:flex;gap:9px"><span class="bullet">▸</span><span data-i18n="exp3_b3">Configured automated notifications, task tracking, and integrated digital tools into workflows.</span></li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--dim)"></div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px">
+          <h3 class="font-bold text-xl" style="color:var(--text)" data-i18n="exp4_title">Sales Manager → Head of Sales &amp; CRM</h3>
+          <span class="mono px-3 py-1 rounded" style="font-size:11px;background:rgba(100,112,136,.1);color:var(--muted);white-space:nowrap">2024 — 2026</span>
+        </div>
+        <p class="mono mb-4" style="font-size:12px;color:var(--muted)" data-i18n="exp4_company">University Admissions Company · Russia</p>
+        <ul style="list-style:none;padding:0;color:var(--muted);font-size:15px;line-height:1.65">
+          <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="exp4_b1">Configured and automated Bitrix24 CRM pipelines and Salebot funnels with IP telephony integration.</span></li>
+          <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="exp4_b2">Built reporting dashboards connecting sales infrastructure to business KPIs.</span></li>
+          <li style="display:flex;gap:9px"><span class="bullet">▸</span><span data-i18n="exp4_b3">This cross-functional background enables direct translation of business requirements into code.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="sr px-6 py-24" style="background:var(--bg-alt)">
+  <div class="max-w-5xl mx-auto">
+    <p class="eyebrow" data-i18n="proj_eyebrow">$ ls -la projects/</p>
+    <h2 class="font-bold text-3xl mb-10" style="color:var(--text)" data-i18n="proj_title">Featured Projects</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+      <a href="project.html?id=study-bot" class="term-card">
+        <div class="term-hdr">
+          <span class="mac-dot" style="background:#ff5f57"></span>
+          <span class="mac-dot" style="background:#febc2e"></span>
+          <span class="mac-dot" style="background:#28c840"></span>
+          <span class="mono" style="font-size:12px;color:var(--muted);margin-left:8px">study_bot/</span>
+          <i data-feather="arrow-right" style="width:14px;height:14px;color:var(--muted);margin-left:auto"></i>
+        </div>
+        <div class="term-body">
+          <p class="prompt mb-3">cat README.md</p>
+          <h3 class="font-bold text-xl mb-2" style="color:var(--text)" data-i18n="proj1_title">Study Bot</h3>
+          <p style="font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:20px" data-i18n="proj1_desc">AI Telegram assistant: FastAPI microservice + Aiogram 3 bot. Accepts lecture PDFs, extracts text via PyMuPDF, and returns structured summaries via Gemini API. Actively used by University of Pavia peers.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="tag">FastAPI</span><span class="tag">Aiogram 3</span><span class="tag">Gemini API</span><span class="tag">PyMuPDF</span>
+          </div>
+        </div>
+      </a>
+      <a href="project.html?id=pet-app" class="term-card">
+        <div class="term-hdr">
+          <span class="mac-dot" style="background:#ff5f57"></span>
+          <span class="mac-dot" style="background:#febc2e"></span>
+          <span class="mac-dot" style="background:#28c840"></span>
+          <span class="mono" style="font-size:12px;color:var(--muted);margin-left:8px">pet_app/</span>
+          <i data-feather="arrow-right" style="width:14px;height:14px;color:var(--muted);margin-left:auto"></i>
+        </div>
+        <div class="term-body">
+          <p class="prompt mb-3">cat README.md</p>
+          <h3 class="font-bold text-xl mb-2" style="color:var(--text)" data-i18n="proj2_title">Pet App</h3>
+          <p style="font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:20px" data-i18n="proj2_desc">Cross-platform mobile app for pet owners. Tinder-style swipe mechanics, real-time matching, and live chat powered by Firebase. Multi-screen Kivy/KV architecture makes up 41% of the codebase.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="tag">Python</span><span class="tag">Kivy</span><span class="tag">Firebase Auth</span><span class="tag">Firebase RT DB</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="sr px-6 py-24" style="background:var(--bg)">
+  <div class="max-w-5xl mx-auto">
+    <p class="eyebrow" data-i18n="edu_eyebrow">$ cat education.json</p>
+    <h2 class="font-bold text-3xl mb-10" style="color:var(--text)" data-i18n="edu_title">Education &amp; Languages</h2>
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-7">
+      <div class="md:col-span-3 space-y-5">
+        <div class="glass-card p-6">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:4px">
+            <h3 class="font-bold" style="color:var(--text);font-size:17px" data-i18n="edu_degree">BSc Artificial Intelligence</h3>
+            <span class="mono" style="font-size:12px;color:var(--amber)">2024 — 2027</span>
+          </div>
+          <p style="color:var(--muted);font-size:14px;margin-bottom:8px" data-i18n="edu_uni">University of Pavia, Italy</p>
+          <span class="mono" style="font-size:11px;color:var(--accent);padding:2px 9px;background:var(--accent-glow);border-radius:4px" data-i18n="edu_expected">expected</span>
+        </div>
+        <div class="glass-card p-6">
+          <h3 class="font-semibold mb-4" style="color:var(--text);font-size:16px" data-i18n="edu_certs_title">Certifications</h3>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px">
+              <span style="color:var(--muted);font-size:14px" data-i18n="edu_cert1">Scientific Computing with Python</span>
+              <span class="mono" style="font-size:11px;color:var(--dim)">freeCodeCamp · 2025</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px">
+              <span style="color:var(--muted);font-size:14px" data-i18n="edu_cert2">Industrial Programming in Python</span>
+              <span class="mono" style="font-size:11px;color:var(--dim)">MSHP · 2024</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px">
+              <span style="color:var(--muted);font-size:14px" data-i18n="edu_cert3">Machine Learning in Python</span>
+              <span class="mono" style="font-size:11px;color:var(--dim)">MSHP · 2024</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px">
+              <span style="color:var(--muted);font-size:14px" data-i18n="edu_cert4">IELTS English Certificate</span>
+              <span class="mono" style="font-size:11px;color:var(--accent)">C1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <div class="glass-card p-6" style="height:100%">
+          <h3 class="font-semibold mb-6" style="color:var(--text);font-size:16px" data-i18n="edu_langs_title">Languages</h3>
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div>
+              <div style="display:flex;justify-content:space-between">
+                <span style="color:var(--text);font-size:14px" data-i18n="edu_lang_ru">Russian</span>
+                <span class="mono" style="font-size:11px;color:var(--accent)">Native</span>
+              </div>
+              <div class="lang-track"><div class="lang-fill" style="width:100%"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between">
+                <span style="color:var(--text);font-size:14px" data-i18n="edu_lang_en">English</span>
+                <span class="mono" style="font-size:11px;color:var(--accent)">C1</span>
+              </div>
+              <div class="lang-track"><div class="lang-fill" style="width:85%"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between">
+                <span style="color:var(--text);font-size:14px" data-i18n="edu_lang_it">Italian</span>
+                <span class="mono" style="font-size:11px;color:var(--accent)">B2</span>
+              </div>
+              <div class="lang-track"><div class="lang-fill" style="width:65%"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between">
+                <span style="color:var(--text);font-size:14px" data-i18n="edu_lang_de">German</span>
+                <span class="mono" style="font-size:11px;color:var(--muted)">A2</span>
+              </div>
+              <div class="lang-track"><div class="lang-fill" style="width:18%;background:var(--dim)"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="px-6 py-10" style="border-top:1px solid var(--border);background:var(--bg)">
+  <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-6">
+    <span class="mono" style="font-size:12px;color:var(--dim)" data-i18n="footer_built">Built by Kirill Sofronov</span>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+      <a href="mailto:sofronovk2006@gmail.com" class="mono" style="font-size:12px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s" onmouseover="this.style.color=\'var(--accent)\'" onmouseout="this.style.color=\'var(--muted)\'">
+        <i data-feather="mail" style="width:13px;height:13px"></i> sofronovk2006@gmail.com
+      </a>
+      <a href="tel:+393447591263" class="mono" style="font-size:12px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s" onmouseover="this.style.color=\'var(--accent)\'" onmouseout="this.style.color=\'var(--muted)\'">
+        <i data-feather="phone" style="width:13px;height:13px"></i> +39 344 759 1263
+      </a>
+      <a href="https://github.com/DimondoAgent" target="_blank" class="mono" style="font-size:12px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s" onmouseover="this.style.color=\'var(--accent)\'" onmouseout="this.style.color=\'var(--muted)\'">
+        <i data-feather="github" style="width:13px;height:13px"></i> GitHub
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+feather.replace();
+
+const PHRASES = {
+  en: ['Python Backend Developer.','API Architect.','LLM Integration Engineer.','Data Pipeline Builder.'],
+  ru: ['Python Backend Developer.','Архитектор API.','LLM Integration Engineer.','Разработчик пайплайнов.'],
+  it: ['Python Backend Developer.','Architetto API.','Ingegnere LLM.','Sviluppatore Pipeline.']
+};
+
+const T = {
+  en: {
+    nav_about:'/about', nav_skills:'/skills', nav_experience:'/experience', nav_projects:'/projects', nav_education:'/education',
+    hero_terminal:'~ $ whoami',
+    hero_contact:'contact me', hero_status:'status: open to new projects',
+    skills_eyebrow:'$ cat tech_stack.json', skills_title:'Technical Arsenal',
+    skills_backend:'Backend', skills_databases:'Databases', skills_auth:'Auth & Security',
+    skills_ai:'AI & Async', skills_infra:'Infrastructure', skills_concepts:'Concepts & Business',
+    exp_eyebrow:'$ git log --oneline career', exp_title:'Work Experience',
+    exp1_title:'Freelance Backend Developer', exp1_company:'Maele Source · Freelance B2B · Italy',
+    exp1_b1:'Designed and built a production Flask web app for a B2B trading client sourcing goods across Europe.',
+    exp1_b2:'Implemented Jinja2 templating, SQLite database, and WSGI configuration; deployed live to Onrender.',
+    exp1_b3:'Delivered the full project independently — from architecture design to production deployment.',
+    exp1_live:'↗ Live App', exp1_details:'View Details →',
+    exp2_title:'Python Automation Engineer', exp2_company:'Logistics Data Solutions · Freelance / Contract',
+    exp2_b1:'Engineered a Python data extraction pipeline to process and parse unstructured logistics feeds.',
+    exp2_b2:'Built a pattern-recognition engine identifying sea container codes — eliminated 100% of manual entry.',
+    exp2_b3:'Designed a scalable three-layer architecture for independent data parsing, validation, and output.',
+    exp2_details:'View Details →',
+    exp3_title:'Technical Assistant / Ops Coordinator', exp3_company:'University Admissions Company · Russia',
+    exp3_b1:'Developed Python scripts to automate routine admin tasks, data collection, and report generation.',
+    exp3_b2:'Parsed, cleaned, and structured data from raw documents to populate internal databases.',
+    exp3_b3:'Configured automated notifications, task tracking, and integrated digital tools into workflows.',
+    exp4_title:'Sales Manager → Head of Sales & CRM', exp4_company:'University Admissions Company · Russia',
+    exp4_b1:'Configured and automated Bitrix24 CRM pipelines and Salebot funnels with IP telephony integration.',
+    exp4_b2:'Built reporting dashboards connecting sales infrastructure to business KPIs.',
+    exp4_b3:'This cross-functional background enables direct translation of business requirements into code.',
+    proj_eyebrow:'$ ls -la projects/', proj_title:'Featured Projects',
+    proj1_title:'Study Bot',
+    proj1_desc:'AI Telegram assistant: FastAPI microservice + Aiogram 3 bot. Accepts lecture PDFs, extracts text via PyMuPDF, and returns structured summaries via Gemini API. Actively used by University of Pavia peers.',
+    proj2_title:'Pet App',
+    proj2_desc:'Cross-platform mobile app for pet owners. Tinder-style swipe mechanics, real-time matching, and live chat powered by Firebase. Multi-screen Kivy/KV architecture makes up 41% of the codebase.',
+    edu_eyebrow:'$ cat education.json', edu_title:'Education & Languages',
+    edu_degree:'BSc Artificial Intelligence', edu_uni:'University of Pavia, Italy', edu_expected:'expected',
+    edu_certs_title:'Certifications',
+    edu_cert1:'Scientific Computing with Python', edu_cert2:'Industrial Programming in Python',
+    edu_cert3:'Machine Learning in Python', edu_cert4:'IELTS English Certificate',
+    edu_langs_title:'Languages', edu_lang_ru:'Russian', edu_lang_en:'English', edu_lang_it:'Italian', edu_lang_de:'German',
+    footer_built:'Built by Kirill Sofronov',
+  },
+  ru: {
+    nav_about:'/обо_мне', nav_skills:'/навыки', nav_experience:'/опыт', nav_projects:'/проекты', nav_education:'/образование',
+    hero_terminal:'~ $ whoami',
+    hero_contact:'написать мне', hero_status:'статус: открыт к проектам',
+    skills_eyebrow:'$ cat tech_stack.json', skills_title:'Технический арсенал',
+    skills_backend:'Backend', skills_databases:'Базы данных', skills_auth:'Аутентификация и безопасность',
+    skills_ai:'ИИ и асинхронность', skills_infra:'Инфраструктура', skills_concepts:'Концепции и бизнес',
+    exp_eyebrow:'$ git log --oneline career', exp_title:'Опыт работы',
+    exp1_title:'Freelance Backend Developer', exp1_company:'Maele Source · Фриланс B2B · Италия',
+    exp1_b1:'Спроектировал и разработал production Flask-приложение для B2B-клиента, поставляющего товары по Европе.',
+    exp1_b2:'Реализовал шаблонизацию Jinja2, базу данных SQLite и конфигурацию WSGI; задеплоил на Onrender.',
+    exp1_b3:'Выполнил проект самостоятельно — от проектирования архитектуры до production-деплоя.',
+    exp1_live:'↗ Live App', exp1_details:'Подробнее →',
+    exp2_title:'Python Automation Engineer', exp2_company:'Logistics Data Solutions · Фриланс / Контракт',
+    exp2_b1:'Разработал Python-пайплайн для извлечения и парсинга неструктурированных логистических фидов.',
+    exp2_b2:'Создал движок распознавания паттернов для кодов морских контейнеров — устранил 100% ручного ввода.',
+    exp2_b3:'Спроектировал масштабируемую трёхслойную архитектуру для парсинга, валидации и вывода данных.',
+    exp2_details:'Подробнее →',
+    exp3_title:'Технический ассистент / Координатор', exp3_company:'Компания по поступлению в университеты · Россия',
+    exp3_b1:'Написал Python-скрипты для автоматизации административных задач, сбора данных и генерации отчётов.',
+    exp3_b2:'Парсил, чистил и структурировал данные из сырых документов для внутренних баз данных.',
+    exp3_b3:'Настроил автоматические уведомления, трекинг задач и интегрировал цифровые инструменты в рабочие процессы.',
+    exp4_title:'Менеджер → Руководитель отдела продаж и CRM', exp4_company:'Компания по поступлению в университеты · Россия',
+    exp4_b1:'Настроил и автоматизировал CRM-пайплайны Bitrix24 и воронки Salebot с интеграцией IP-телефонии.',
+    exp4_b2:'Создал дашборды отчётности, связывающие продажи с бизнес-KPI.',
+    exp4_b3:'Кросс-функциональный опыт позволяет напрямую переводить бизнес-требования в код.',
+    proj_eyebrow:'$ ls -la projects/', proj_title:'Ключевые проекты',
+    proj1_title:'Study Bot',
+    proj1_desc:'ИИ-ассистент в Telegram: FastAPI-микросервис + Aiogram 3 бот. Принимает PDF-лекции, извлекает текст через PyMuPDF и возвращает конспекты через Gemini API. Активно используется студентами Университета Павии.',
+    proj2_title:'Pet App',
+    proj2_desc:'Кроссплатформенное мобильное приложение для владельцев питомцев. Свайпы в стиле Tinder, матчинг в реальном времени и чат на Firebase. Архитектура Kivy/KV составляет 41% кодовой базы.',
+    edu_eyebrow:'$ cat education.json', edu_title:'Образование и языки',
+    edu_degree:'BSc Искусственный интеллект', edu_uni:'Университет Павии, Италия', edu_expected:'ожидается',
+    edu_certs_title:'Сертификаты',
+    edu_cert1:'Scientific Computing with Python', edu_cert2:'Промышленное программирование на Python',
+    edu_cert3:'Машинное обучение на Python', edu_cert4:'Сертификат IELTS по английскому',
+    edu_langs_title:'Языки', edu_lang_ru:'Русский', edu_lang_en:'Английский', edu_lang_it:'Итальянский', edu_lang_de:'Немецкий',
+    footer_built:'Сделано Кириллом Софроновым',
+  },
+  it: {
+    nav_about:'/su_di_me', nav_skills:'/competenze', nav_experience:'/esperienza', nav_projects:'/progetti', nav_education:'/formazione',
+    hero_terminal:'~ $ whoami',
+    hero_contact:'contattami', hero_status:'stato: aperto a nuovi progetti',
+    skills_eyebrow:'$ cat tech_stack.json', skills_title:'Arsenale Técnico',
+    skills_backend:'Backend', skills_databases:'Database', skills_auth:'Autenticazione e Sicurezza',
+    skills_ai:'AI e Async', skills_infra:'Infrastruttura', skills_concepts:'Concetti e Business',
+    exp_eyebrow:'$ git log --oneline career', exp_title:'Esperienza Lavorativa',
+    exp1_title:'Sviluppatore Backend Freelance', exp1_company:'Maele Source · Freelance B2B · Italia',
+    exp1_b1:"Progettato e sviluppato un'app Flask in produzione per un cliente B2B che approvvigiona beni in tutta Europa.",
+    exp1_b2:'Implementato templating Jinja2, database SQLite e configurazione WSGI; deployato su Onrender.',
+    exp1_b3:'Consegnato il progetto completo in modo indipendente — dalla progettazione al deploy in produzione.',
+    exp1_live:'↗ App Live', exp1_details:'Dettagli →',
+    exp2_title:'Ingegnere di Automazione Python', exp2_company:'Logistics Data Solutions · Freelance / Contratto',
+    exp2_b1:'Sviluppato una pipeline Python per estrarre e analizzare feed logistici non strutturati.',
+    exp2_b2:"Creato un motore di riconoscimento pattern per codici container — eliminato il 100% dell'inserimento manuale.",
+    exp2_b3:"Progettato un'architettura scalabile a tre livelli per parsing, validazione e output dei dati.",
+    exp2_details:'Dettagli →',
+    exp3_title:'Assistente Técnico / Coordinatore Operativo', exp3_company:'Agenzia Ammissioni Universitarie · Russia',
+    exp3_b1:'Sviluppato script Python per automatizzare task amministrativi, raccolta dati e generazione report.',
+    exp3_b2:'Analizzato, pulito e strutturato dati da documenti grezzi per popolare database interni.',
+    exp3_b3:'Configurato notifiche automatiche, tracciamento task e integrato strumenti digitali nei flussi di lavoro.',
+    exp4_title:'Sales Manager → Responsabile Vendite e CRM', exp4_company:'Agenzia Ammissioni Universitarie · Russia',
+    exp4_b1:'Configurato e automatizzato pipeline CRM Bitrix24 e funnel Salebot con integrazione telefonia IP.',
+    exp4_b2:"Creato dashboard di reportistica collegando l'infrastruttura di vendita ai KPI aziendali.",
+    exp4_b3:'Questo background cross-funzionale consente la traduzione diretta dei requisiti di business in codice.',
+    proj_eyebrow:'$ ls -la projects/', proj_title:'Progetti in Evidenza',
+    proj1_title:'Study Bot',
+    proj1_desc:"Assistente IA su Telegram: microservizio FastAPI + bot Aiogram 3. Accetta PDF di lezioni, estrae testo via PyMuPDF e restituisce riassunti tramite Gemini API. Usato attivamente dai colleghi dell'Università di Pavia.",
+    proj2_title:'Pet App',
+    proj2_desc:"App mobile cross-platform per proprietari di animali. Swipe stile Tinder, matching in tempo reale e chat live su Firebase. L'architettura Kivy/KV costituisce il 41% del codice.",
+    edu_eyebrow:'$ cat education.json', edu_title:'Formazione e Lingue',
+    edu_degree:'Laurea in Intelligenza Artificiale', edu_uni:'Università di Pavia, Italy', edu_expected:'previsto',
+    edu_certs_title:'Certificazioni',
+    edu_cert1:'Scientific Computing con Python', edu_cert2:'Programmazione Industriale in Python',
+    edu_cert3:'Machine Learning in Python', edu_cert4:'Certificato IELTS di Inglese',
+    edu_langs_title:'Lingue', edu_lang_ru:'Russo', edu_lang_en:'Inglese', edu_lang_it:'Italiano', edu_lang_de:'Tedesco',
+    footer_built:'Realizzato da Kirill Sofronov',
+  }
+};
+
+const BIO = {
+  en: 'Backend Python developer building production REST APIs, microservices, and LLM integrations. Former Head of Sales — I bridge the gap between business requirements and clean code. Based in <span style="color:var(--text)">Pavia, Italy.</span>',
+  ru: 'Python backend-разработчик, строящий production REST API, микросервисы и LLM-интеграции. Бывший руководитель отдела продаж — умею переводить бизнес-требования в чистый код. Нахожусь в <span style="color:var(--text)">Павии, Италия.</span>',
+  it: 'Sviluppatore Python backend che costruisce REST API in produzione, microservizi e integrazioni LLM. Ex Responsabile Vendite — colmo il divario tra requisiti di business e codice pulito. Basato a <span style="color:var(--text)">Pavia, Italy.</span>'
+};
+
+let currentLang = localStorage.getItem('ks_lang') || 'en';
+let pi = 0, ci = 0, del = false, twTimer = null;
+const tw = document.getElementById('typewriter');
+
+function tick() {
+  const p = PHRASES[currentLang][pi];
+  if (!del) {
+    tw.textContent = p.slice(0, ++ci);
+    if (ci === p.length) { twTimer = setTimeout(() => { del = true; tick(); }, 2300); return; }
+  } else {
+    tw.textContent = p.slice(0, --ci);
+    if (ci === 0) { del = false; pi = (pi + 1) % PHRASES[currentLang].length; }
+  }
+  twTimer = setTimeout(tick, del ? 38 : 82);
+}
+
+function restartTypewriter() {
+  if (twTimer) clearTimeout(twTimer);
+  pi = 0; ci = 0; del = false;
+  tw.textContent = '';
+  twTimer = setTimeout(tick, 400);
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('ks_lang', lang);
+  const t = T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.getElementById('hero-bio').innerHTML = BIO[lang];
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  restartTypewriter();
+}
+
+// Init
+setLang(currentLang);
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.07 });
+document.querySelectorAll('.sr').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
