@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Details | KS.dev</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+  <style>
+    :root{--bg:#080c12;--bg-alt:#060a0f;--card:#0d1320;--border:#1b2236;--accent:#3ddba8;--text:#dde2ec;--muted:#627088;--dim:#2d3a4f;}
+    body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);}
+    .mono{font-family:'JetBrains Mono',monospace;}
+    .nav-glass{background:rgba(8,12,18,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+    .term-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+    .term-hdr{background:#101725;padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);}
+    .mac-dot{width:12px;height:12px;border-radius:50%;}
+    .tag{display:inline-block;padding:3px 11px;background:rgba(61,219,168,0.07);border:1px solid rgba(61,219,168,0.2);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);white-space:nowrap;}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:13px;text-decoration:none;transition:color 0.2s;}
+    .btn-ghost:hover{color:var(--text);}
+    .bullet{color:var(--accent);flex-shrink:0;margin-right:8px;}
+    
+    /* Стили для переключателя языков */
+    .lang-switcher{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:3px;}
+    .lang-btn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 9px;border-radius:4px;transition:all 0.18s;letter-spacing:0.04em;}
+    .lang-btn:hover{color:var(--text);}
+    .lang-btn.active{background:var(--accent);color:var(--bg);font-weight:600;}
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="mono font-bold text-lg tracking-tighter" style="color:var(--text);text-decoration:none">
+        KS<span style="color:var(--accent)">.dev</span>
+      </a>
+      
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="btn-ghost hidden md:flex" style="padding:0">
+          <i data-feather="arrow-left" style="width:16px;height:16px"></i> <span data-i18n="back">/back_to_home</span>
+        </a>
+        
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" data-lang="it" onclick="setLang('it')">IT</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow pt-28 px-6 pb-20 max-w-4xl mx-auto w-full">
+    <div id="content" class="hidden">
+        <div class="term-card shadow-2xl">
+            <div class="term-hdr">
+              <span class="mac-dot" style="background:#ff5f57"></span>
+              <span class="mac-dot" style="background:#febc2e"></span>
+              <span class="mac-dot" style="background:#28c840"></span>
+              <span id="term-title" class="mono" style="font-size:12px;color:var(--muted);margin-left:8px"></span>
+            </div>
+            <div class="p-8 md:p-12">
+                <p id="tech-stack" class="mono mb-4 text-sm" style="color:var(--accent)"></p>
+                <h1 id="title" class="text-3xl md:text-5xl font-bold mb-6 text-white tracking-tight"></h1>
+                <p id="desc" class="text-lg leading-relaxed text-gray-400 mb-8"></p>
+
+                <h2 data-i18n="tech_details" class="text-xl font-bold text-white mono mb-4 border-b border-gray-800 pb-2">Technical Details</h2>
+                <ul id="features" class="space-y-3 mb-10 text-gray-400"></ul>
+
+                <div class="flex flex-wrap gap-3 mb-10" id="tags"></div>
+
+                <div class="flex flex-wrap gap-4 pt-6 border-t border-gray-800" id="links"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="error" class="hidden text-center py-20">
+        <i data-feather="alert-circle" class="w-16 h-16 mx-auto mb-6" style="color:var(--accent)"></i>
+        <h1 data-i18n="error_title" class="text-2xl font-bold text-white mono mb-4">404: Project Not Found</h1>
+        <p data-i18n="error_desc" class="text-gray-400 mb-8">The requested project details could not be loaded.</p>
+        <a href="index.html" data-i18n="error_btn" class="btn-ghost border border-gray-800 rounded hover:border-gray-600">Return Home</a>
+    </div>
+  </main>
+
+  <script>
+    feather.replace();
+
+    // Статические переводы для интерфейса
+    const T = {
+        en: {
+            back: '/back_to_home',
+            tech_details: 'Technical Details',
+            error_title: '404: Project Not Found',
+            error_desc: 'The requested project details could not be loaded.',
+            error_btn: 'Return Home'
+        },
+        ru: {
+            back: '/на_главную',
+            tech_details: 'Технические детали',
+            error_title: '404: Проект не найден',
+            error_desc: 'Не удалось загрузить данные запрашиваемого проекта.',
+            error_btn: 'Вернуться на главную'
+        },
+        it: {
+            back: '/torna_alla_home',
+            tech_details: 'Dettagli Tecnici',
+            error_title: '404: Progetto non trovato',
+            error_desc: 'Impossibile caricare i dettagli del progetto richiesto.',
+            error_btn: 'Torna alla Home'
+        }
+    };
+
+    // Динамические данные проектов с переводами
+    const data = {
+        "study-bot": {
+            file: "study_bot.md",
+            en: {
+                title: "Study Bot — AI Telegram Assistant",
+                tech: "> FastAPI / Aiogram 3 / Gemini API",
+                desc: "A microservice system designed to help students optimize their learning process. It accepts lecture PDFs and returns highly structured summaries. Actively used by peers at the University of Pavia.",
+                features: [
+                    "Two independently running services (backend/ + bot/) with async-first architecture.",
+                    "Automated text extraction from lecture and study PDFs utilizing PyMuPDF.",
+                    "Structured summaries generated with Gemini API custom prompts.",
+                    "Robust environment isolation and configuration management via python-dotenv and Pydantic v2 validation."
+                ],
+                tags: ["FastAPI", "Aiogram 3", "Gemini API", "PyMuPDF", "aiohttp", "Pydantic v2"],
+                links: [{ label: "GitHub Repository", url: "https://github.com/DimondoAgent/study_bot", icon: "github" }]
+            },
+            ru: {
+                title: "Study Bot — ИИ Telegram Ассистент",
+                tech: "> FastAPI / Aiogram 3 / Gemini API",
+                desc: "Микросервисная система для оптимизации учебного процесса. Принимает PDF-лекции и возвращает четко структурированные конспекты. Активно используется студентами Университета Павии.",
+                features: [
+                    "Два независимо работающих сервиса (backend/ и bot/) с асинхронной архитектурой.",
+                    "Автоматизированное извлечение текста из учебных PDF-файлов с помощью PyMuPDF.",
+                    "Генерация структурированных конспектов через Gemini API с кастомными промптами.",
+                    "Надежная изоляция окружения и валидация конфигурации через python-dotenv и Pydantic v2."
+                ],
+                tags: ["FastAPI", "Aiogram 3", "Gemini API", "PyMuPDF", "aiohttp", "Pydantic v2"],
+                links: [{ label: "GitHub Репозиторий", url: "https://github.com/DimondoAgent/study_bot", icon: "github" }]
+            },
+            it: {
+                title: "Study Bot — Assistente IA Telegram",
+                tech: "> FastAPI / Aiogram 3 / Gemini API",
+                desc: "Un sistema di microservizi progettato per aiutare gli studenti a ottimizzare il processo di apprendimento. Accetta PDF delle lezioni e restituisce riassunti altamente strutturati. Usato attivamente dai colleghi dell'Università di Pavia.",
+                features: [
+                    "Due servizi in esecuzione indipendente (backend/ + bot/) con architettura async-first.",
+                    "Estrazione automatizzata del testo da PDF di lezioni e studio utilizzando PyMuPDF.",
+                    "Riassunti strutturati generati con prompt personalizzati Gemini API.",
+                    "Solido isolamento dell'ambiente e gestione della configurazione tramite python-dotenv e validazione Pydantic v2."
+                ],
+                tags: ["FastAPI", "Aiogram 3", "Gemini API", "PyMuPDF", "aiohttp", "Pydantic v2"],
+                links: [{ label: "Repository GitHub", url: "https://github.com/DimondoAgent/study_bot", icon: "github" }]
+            }
+        },
+        "pet-app": {
+            file: "pet_app.py",
+            en: {
+                title: "Pet App — Cross-Platform Mobile",
+                tech: "> Python / Kivy / Firebase",
+                desc: "A Tinder-style mobile application tailored for pet owners to connect, interact, and discover communities. Built with Python using a native multi-screen UI approach.",
+                features: [
+                    "Firebase Authentication + Realtime Database for live chat and matching.",
+                    "Multi-screen UI in Kivy/KV (accounting for 41% of codebase): profiles, likes, map, chat.",
+                    "Dynamic swipe mechanics and interactive user tracking."
+                ],
+                tags: ["Python", "Kivy", "KV Language", "Firebase Auth", "Firebase RT DB"],
+                links: [{ label: "GitHub Repository", url: "https://github.com/DimondoAgent/pet_app", icon: "github" }]
+            },
+            ru: {
+                title: "Pet App — Кроссплатформенное приложение",
+                tech: "> Python / Kivy / Firebase",
+                desc: "Мобильное приложение в стиле Tinder для владельцев питомцев для поиска единомышленников и общения. Написано на Python с использованием нативного многоэкранного интерфейса.",
+                features: [
+                    "Firebase Authentication + Realtime Database для чата в реальном времени и матчинга.",
+                    "Многоэкранный UI на Kivy/KV (составляет 41% кодовой базы): профили, лайки, карта, чат.",
+                    "Динамическая механика свайпов и интерактивное отслеживание пользователей."
+                ],
+                tags: ["Python", "Kivy", "KV Language", "Firebase Auth", "Firebase RT DB"],
+                links: [{ label: "GitHub Репозиторий", url: "https://github.com/DimondoAgent/pet_app", icon: "github" }]
+            },
+            it: {
+                title: "Pet App — App Mobile Cross-Platform",
+                tech: "> Python / Kivy / Firebase",
+                desc: "Un'applicazione mobile in stile Tinder su misura per i proprietari di animali domestici per connettersi, interagire e scoprire comunità. Costruita con Python utilizzando un approccio UI multi-schermo nativo.",
+                features: [
+                    "Autenticazione Firebase + Realtime Database per chat live e matching.",
+                    "UI multi-schermo in Kivy/KV (che costituisce il 41% del codice base): profili, like, mappa, chat.",
+                    "Meccaniche di swipe dinamiche e tracciamento interattivo degli utenti."
+                ],
+                tags: ["Python", "Kivy", "KV Language", "Firebase Auth", "Firebase RT DB"],
+                links: [{ label: "Repository GitHub", url: "https://github.com/DimondoAgent/pet_app", icon: "github" }]
+            }
+        },
+        "maele-source": {
+            file: "maele_source.wsgi",
+            en: {
+                title: "Maele Source — B2B Trading Platform",
+                tech: "> Flask / SQLite / WSGI",
+                desc: "A production-grade web application built custom for a B2B trading client focused on sourcing and distributing goods across European markets.",
+                features: [
+                    "Implemented Jinja2 templating, SQLite database, WSGI configuration and deployed to Onrender.",
+                    "Delivered the full project independently from architecture design to live production deployment.",
+                    "Optimized relational data storage using an integrated SQLite database configuration."
+                ],
+                tags: ["Flask", "Jinja2", "SQLite", "WSGI", "Onrender", "B2B Production"],
+                links: [
+                    { label: "Live Application", url: "https://maele-source.onrender.com", icon: "external-link" },
+                    { label: "GitHub Repository", url: "https://github.com/DimondoAgent/MAELE-SOURCE", icon: "github" }
+                ]
+            },
+            ru: {
+                title: "Maele Source — B2B Торговая Платформа",
+                tech: "> Flask / SQLite / WSGI",
+                desc: "Веб-приложение production-уровня, разработанное на заказ для B2B-клиента, занимающегося поиском и дистрибуцией товаров на европейских рынках.",
+                features: [
+                    "Реализована шаблонизация Jinja2, база данных SQLite, конфигурация WSGI и развертывание на Onrender.",
+                    "Полный цикл разработки выполнен самостоятельно: от проектирования архитектуры до запуска в production.",
+                    "Оптимизировано хранение реляционных данных с использованием интегрированной конфигурации SQLite."
+                ],
+                tags: ["Flask", "Jinja2", "SQLite", "WSGI", "Onrender", "B2B Production"],
+                links: [
+                    { label: "Live Приложение", url: "https://maele-source.onrender.com", icon: "external-link" },
+                    { label: "GitHub Репозиторий", url: "https://github.com/DimondoAgent/MAELE-SOURCE", icon: "github" }
+                ]
+            },
+            it: {
+                title: "Maele Source — Piattaforma B2B",
+                tech: "> Flask / SQLite / WSGI",
+                desc: "Un'applicazione web di livello production costruita su misura per un cliente B2B focalizzato sull'approvvigionamento e la distribuzione di beni nei mercati europei.",
+                features: [
+                    "Implementato templating Jinja2, database SQLite, configurazione WSGI e deploy su Onrender.",
+                    "Consegnato il progetto completo in modo indipendente dalla progettazione dell'architettura al deploy in produzione.",
+                    "Archiviazione dati relazionali ottimizzata utilizzando una configurazione database SQLite integrata."
+                ],
+                tags: ["Flask", "Jinja2", "SQLite", "WSGI", "Onrender", "B2B Production"],
+                links: [
+                    { label: "App Live", url: "https://maele-source.onrender.com", icon: "external-link" },
+                    { label: "Repository GitHub", url: "https://github.com/DimondoAgent/MAELE-SOURCE", icon: "github" }
+                ]
+            }
+        },
+        "logistics-pipeline": {
+            file: "pipeline.py",
+            en: {
+                title: "Logistics Data Pipeline",
+                tech: "> Python / Data Automation",
+                desc: "An automated enterprise data processing pipeline engineered to parse and refine unstructured logistics feeds, eliminating manual overhead.",
+                features: [
+                    "Engineered a Python-based data extraction pipeline to process and parse unstructured logistics data feeds.",
+                    "Developed a pattern-recognition engine to identify and track sea container codes in noisy inputs, successfully eliminating 100% of manual data entry for the client.",
+                    "Designed a scalable, three-layer processing architecture ensuring independent data parsing, validation, and output generation."
+                ],
+                tags: ["Python", "Data Pipelines", "Regex Engine", "Automation"],
+                links: [{ label: "GitHub Repository", url: "https://github.com/DimondoAgent/cont_analyzer", icon: "github" }]
+            },
+            ru: {
+                title: "Логистический Пайплайн Данных",
+                tech: "> Python / Data Automation",
+                desc: "Автоматизированный корпоративный пайплайн для парсинга и очистки неструктурированных логистических фидов, полностью устраняющий ручную работу.",
+                features: [
+                    "Разработан Python-пайплайн для извлечения, обработки и парсинга неструктурированных логистических данных.",
+                    "Создан движок распознавания паттернов для идентификации кодов морских контейнеров, что позволило на 100% избавиться от ручного ввода данных.",
+                    "Спроектирована масштабируемая трёхслойная архитектура, обеспечивающая независимый парсинг, валидацию и генерацию вывода."
+                ],
+                tags: ["Python", "Data Pipelines", "Regex Engine", "Automation"],
+                links: [{ label: "GitHub Репозиторий", url: "https://github.com/DimondoAgent/cont_analyzer", icon: "github" }]
+            },
+            it: {
+                title: "Pipeline Dati Logistici",
+                tech: "> Python / Data Automation",
+                desc: "Una pipeline aziendale automatizzata per l'elaborazione dei dati progettata per analizzare e raffinare feed logistici non strutturati, eliminando il lavoro manuale.",
+                features: [
+                    "Progettata una pipeline di estrazione dati basata su Python per elaborare e analizzare feed di dati logistici non strutturati.",
+                    "Sviluppato un motore di riconoscimento di pattern per identificare e tracciare i codici dei container marittimi in input rumorosi, eliminando con successo il 100% dell'inserimento manuale dei dati per il cliente.",
+                    "Progettata un'architettura di elaborazione scalabile a tre livelli che garantisce parsing, convalida e generazione di output dei dati indipendenti."
+                ],
+                tags: ["Python", "Data Pipelines", "Regex Engine", "Automation"],
+                links: [{ label: "Repository GitHub", url: "https://github.com/DimondoAgent/cont_analyzer", icon: "github" }]
+            }
+        }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get('id');
+    const project = data[projectId];
+
+    // Функция обновления страницы при смене языка
+    function renderProject(lang) {
+        if (project) {
+            const p = project[lang];
+            document.getElementById('content').classList.remove('hidden');
+            document.getElementById('term-title').textContent = project.file;
+            document.getElementById('title').textContent = p.title;
+            document.getElementById('tech-stack').textContent = p.tech;
+            document.getElementById('desc').textContent = p.desc;
+
+            const featuresUl = document.getElementById('features');
+            featuresUl.innerHTML = ''; // Очищаем старые фичи
+            p.features.forEach(f => {
+                const li = document.createElement('li');
+                li.className = "flex items-start";
+                li.innerHTML = `<span class="bullet">▸</span><span>${f}</span>`;
+                featuresUl.appendChild(li);
+            });
+
+            const tagsDiv = document.getElementById('tags');
+            tagsDiv.innerHTML = ''; // Очищаем старые теги
+            p.tags.forEach(t => {
+                const span = document.createElement('span');
+                span.className = "tag";
+                span.textContent = t;
+                tagsDiv.appendChild(span);
+            });
+
+            const linksDiv = document.getElementById('links');
+            linksDiv.innerHTML = ''; // Очищаем старые ссылки
+            p.links.forEach(l => {
+                const a = document.createElement('a');
+                a.href = l.url;
+                a.target = "_blank";
+                a.className = "flex items-center text-sm px-4 py-2 bg-[var(--border)] text-white rounded hover:bg-[var(--dim)] transition-colors mono";
+                a.innerHTML = `<i data-feather="${l.icon}" class="w-4 h-4 mr-2" style="color:var(--accent)"></i> ${l.label}`;
+                linksDiv.appendChild(a);
+            });
+
+            feather.replace();
+        } else {
+            document.getElementById('error').classList.remove('hidden');
+        }
+    }
+
+    function setLang(lang) {
+        localStorage.setItem('ks_lang', lang);
+        
+        // Обновляем статические тексты
+        const t = T[lang];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            if (t[key] !== undefined) el.textContent = t[key];
+        });
+
+        // Обновляем активную кнопку в навигации
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+
+        // Перерисовываем контент проекта на новом языке
+        renderProject(lang);
+    }
+
+    // При загрузке страницы читаем сохраненный язык (по умолчанию 'en')
+    const savedLang = localStorage.getItem('ks_lang') || 'en';
+    setLang(savedLang);
+
+  </script>
+</body>
+</html>
