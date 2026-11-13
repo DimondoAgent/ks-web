@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kirill Sofronov — Python Backend Developer</title>
+  <meta name="description" content="Kirill Sofronov, Python Backend Developer and AI student at the University of Pavia. Backend systems, REST APIs, AI integrations, and automation.">
+  <title>Kirill Sofronov — Python Backend Developer &amp; AI Integrations</title>
   <script>
     tailwind.config = {
       theme: {
@@ -30,20 +31,35 @@
     .mono{font-family:'JetBrains Mono',monospace;}
     .dot-grid{background-image:radial-gradient(circle,rgba(61,219,168,0.11) 1px,transparent 1px);background-size:30px 30px;}
     .nav-glass{background:rgba(8,12,18,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+    .nav-glass{animation:nav-enter .65s cubic-bezier(.2,.75,.25,1) both;}
     .nav-link{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
     .nav-link:hover{color:var(--accent);}
-    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border:1px solid var(--accent);border-radius:6px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:13px;text-decoration:none;transition:all 0.2s;}
-    .btn-primary:hover{background:var(--accent);color:var(--bg);box-shadow:0 0 24px rgba(61,219,168,0.28);}
-    .btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:13px;text-decoration:none;transition:color 0.2s;}
-    .btn-ghost:hover{color:var(--text);}
-    .glass-card{background:var(--card);border:1px solid var(--border);border-radius:10px;transition:border-color 0.25s;}
-    .glass-card:hover{border-color:rgba(61,219,168,0.35);}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border:1px solid var(--accent);border-radius:6px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:13px;text-decoration:none;transition:all 0.25s cubic-bezier(.2,.75,.25,1);}
+    .btn-primary:hover{background:var(--accent);color:var(--bg);box-shadow:0 0 24px rgba(61,219,168,0.28);transform:translateY(-2px);}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:13px;text-decoration:none;transition:color 0.2s,transform 0.25s;}
+    .btn-ghost:hover{color:var(--text);transform:translateX(3px);}
+    .glass-card{background:var(--card);border:1px solid var(--border);border-radius:10px;transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;}
+    .glass-card:hover{border-color:rgba(61,219,168,0.35);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.2);}
     .tag{display:inline-block;padding:3px 11px;background:rgba(61,219,168,0.07);border:1px solid rgba(61,219,168,0.2);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);white-space:nowrap;}
-    .term-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color 0.25s,transform 0.25s;}
-    .term-card:hover{border-color:rgba(61,219,168,0.5);transform:translateY(-4px);}
+    .term-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color 0.35s,transform 0.35s cubic-bezier(.2,.75,.25,1),box-shadow 0.35s;}
+    .term-card:hover{border-color:rgba(61,219,168,0.5);transform:translateY(-6px);box-shadow:0 22px 55px rgba(0,0,0,.26),0 0 28px rgba(61,219,168,.05);}
     .term-hdr{background:#101725;padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);}
     .mac-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
     .term-body{padding:24px;}
+    .term-hdr .mac-dot{transition:transform .3s,box-shadow .3s;}
+    .term-card:hover .mac-dot{transform:scale(1.12);box-shadow:0 0 10px currentColor;}
+    .hero-copy>*{opacity:0;animation:rise-in .75s cubic-bezier(.2,.75,.25,1) forwards;}
+    .hero-copy>*:nth-child(1){animation-delay:.12s}.hero-copy>*:nth-child(2){animation-delay:.22s}.hero-copy>*:nth-child(3){animation-delay:.34s}.hero-copy>*:nth-child(4){animation-delay:.46s}.hero-copy>*:nth-child(5){animation-delay:.58s}
+    .hero-glow{animation:glow-breathe 8s ease-in-out infinite alternate;}
+    .hero-portrait{opacity:0;animation:portrait-in .9s .3s cubic-bezier(.2,.75,.25,1) forwards;}
+    .hero-portrait img{transition:transform .7s cubic-bezier(.2,.75,.25,1),filter .7s;}
+    .hero-portrait:hover img{transform:scale(1.035);filter:saturate(1.08);}
+    .ticker{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-alt);}
+    .ticker-track{display:flex;width:max-content;animation:ticker-scroll 32s linear infinite;will-change:transform;}
+    .ticker-group{display:flex;flex:0 0 auto;align-items:center;gap:24px;padding:17px 12px;white-space:nowrap;}
+    .ticker-item{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;}
+    .ticker-item b{font-weight:400;color:var(--accent);}
+    .ticker:hover .ticker-track{animation-play-state:paused;}
     .tl-track{position:relative;padding-left:36px;}
     .tl-track::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border);}
     .tl-item{position:relative;padding-bottom:44px;}
@@ -52,9 +68,19 @@
     .bullet{color:var(--accent);flex-shrink:0;}
     .lang-track{height:3px;background:var(--border);border-radius:2px;margin-top:5px;overflow:hidden;}
     .lang-fill{height:100%;background:var(--accent);border-radius:2px;}
-    .sr{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease;}
-    .sr.in{opacity:1;transform:none;}
+    .sr,.reveal{opacity:0;transform:translateY(26px);transition:opacity .75s cubic-bezier(.2,.75,.25,1),transform .75s cubic-bezier(.2,.75,.25,1);}
+    .sr.in,.reveal.in{opacity:1;transform:none;}
+    .reveal[data-delay="1"]{transition-delay:.08s}.reveal[data-delay="2"]{transition-delay:.16s}.reveal[data-delay="3"]{transition-delay:.24s}.reveal[data-delay="4"]{transition-delay:.32s}
+    .tl-track::before{transform:scaleY(0);transform-origin:top;transition:transform 1.1s .25s cubic-bezier(.2,.75,.25,1);}
+    .sr.in .tl-track::before{transform:scaleY(1);}
+    .tl-dot{transform:scale(.5);transition:transform .4s cubic-bezier(.2,.75,.25,1);}
+    .sr.in .tl-dot{transform:scale(1);}
     #typewriter::after{content:'|';animation:blink 1s step-start infinite;color:var(--accent);}
+    @keyframes nav-enter{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes rise-in{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes portrait-in{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes glow-breathe{from{opacity:.65;transform:translateY(-50%) scale(.94)}to{opacity:1;transform:translateY(-50%) scale(1.08)}}
+    @keyframes ticker-scroll{to{transform:translateX(-16.666667%)}}
     @keyframes blink{50%{opacity:0;}}
     @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
     .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:8px;}
@@ -67,7 +93,7 @@
     .lang-btn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 9px;border-radius:4px;transition:all 0.18s;letter-spacing:0.04em;}
     .lang-btn:hover{color:var(--text);}
     .lang-btn.active{background:var(--accent);color:var(--bg);font-weight:600;}
-    @media(prefers-reduced-motion:reduce){.sr,.term-card,.glass-card{transition:none!important;}#typewriter::after{animation:none;}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}.sr,.reveal{opacity:1;transform:none;}#typewriter::after{animation:none;}}
   </style>
 </head>
 <body>
@@ -93,9 +119,9 @@
 </nav>
 
 <section id="about" class="dot-grid min-h-screen flex items-center px-6 pt-20" style="position:relative">
-  <div style="position:absolute;top:50%;left:-80px;width:560px;height:560px;background:radial-gradient(circle,rgba(61,219,168,0.055) 0%,transparent 68%);transform:translateY(-50%);pointer-events:none"></div>
+  <div class="hero-glow" style="position:absolute;top:50%;left:-80px;width:560px;height:560px;background:radial-gradient(circle,rgba(61,219,168,0.075) 0%,transparent 68%);transform:translateY(-50%);pointer-events:none"></div>
   <div class="max-w-5xl mx-auto w-full grid lg:grid-cols-[1fr_300px] gap-12 lg:gap-16 items-center" style="position:relative;z-index:1">
-    <div>
+    <div class="hero-copy">
       <p class="mono mb-5" style="font-size:13px;color:var(--muted)" data-i18n="hero_terminal">~ $ whoami</p>
       <h1 class="font-bold tracking-tight" style="font-size:clamp(2.8rem,8vw,5.6rem);line-height:1.05;color:var(--text);margin-bottom:16px">Kirill Sofronov.</h1>
       <h2 class="font-semibold" style="font-size:clamp(1.3rem,3.5vw,2rem);color:var(--muted);margin-bottom:32px;min-height:2.8rem">
@@ -115,7 +141,7 @@
       </div>
     </div>
     <div class="order-first lg:order-last">
-      <div class="term-card" style="max-width:280px;margin:0 auto;box-shadow:0 0 60px rgba(61,219,168,0.07)">
+      <div class="term-card hero-portrait" style="max-width:280px;margin:0 auto;box-shadow:0 0 60px rgba(61,219,168,0.07)">
         <div class="term-hdr">
           <span class="mac-dot" style="background:#ff5f57"></span>
           <span class="mac-dot" style="background:#febc2e"></span>
@@ -131,6 +157,29 @@
     </div>
   </div>
 </section>
+
+<div class="ticker" aria-label="Python backend, AI integrations, APIs, and automation">
+  <div class="ticker-track" aria-hidden="true">
+    <div class="ticker-group">
+      <span class="ticker-item"><b>✳</b> Python Backend</span><span class="ticker-item"><b>✳</b> AI Integrations</span><span class="ticker-item"><b>✳</b> REST APIs</span><span class="ticker-item"><b>✳</b> Automation</span><span class="ticker-item"><b>✳</b> Data Pipelines</span>
+    </div>
+    <div class="ticker-group">
+      <span class="ticker-item"><b>✳</b> Python Backend</span><span class="ticker-item"><b>✳</b> AI Integrations</span><span class="ticker-item"><b>✳</b> REST APIs</span><span class="ticker-item"><b>✳</b> Automation</span><span class="ticker-item"><b>✳</b> Data Pipelines</span>
+    </div>
+    <div class="ticker-group">
+      <span class="ticker-item"><b>✳</b> Python Backend</span><span class="ticker-item"><b>✳</b> AI Integrations</span><span class="ticker-item"><b>✳</b> REST APIs</span><span class="ticker-item"><b>✳</b> Automation</span><span class="ticker-item"><b>✳</b> Data Pipelines</span>
+    </div>
+    <div class="ticker-group">
+      <span class="ticker-item"><b>✳</b> Python Backend</span><span class="ticker-item"><b>✳</b> AI Integrations</span><span class="ticker-item"><b>✳</b> REST APIs</span><span class="ticker-item"><b>✳</b> Automation</span><span class="ticker-item"><b>✳</b> Data Pipelines</span>
+    </div>
+    <div class="ticker-group">
+      <span class="ticker-item"><b>✳</b> Python Backend</span><span class="ticker-item"><b>✳</b> AI Integrations</span><span class="ticker-item"><b>✳</b> REST APIs</span><span class="ticker-item"><b>✳</b> Automation</span><span class="ticker-item"><b>✳</b> Data Pipelines</span>
+    </div>
+    <div class="ticker-group">
+      <span class="ticker-item"><b>✳</b> Python Backend</span><span class="ticker-item"><b>✳</b> AI Integrations</span><span class="ticker-item"><b>✳</b> REST APIs</span><span class="ticker-item"><b>✳</b> Automation</span><span class="ticker-item"><b>✳</b> Data Pipelines</span>
+    </div>
+  </div>
+</div>
 
 <section id="skills" class="sr px-6 py-24" style="background:var(--bg-alt)">
   <div class="max-w-5xl mx-auto">
@@ -170,7 +219,7 @@
           <span class="font-semibold" style="color:var(--text)" data-i18n="skills_ai">AI &amp; Async</span>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:7px">
-          <span class="tag">Gemini API</span><span class="tag">Aiogram 3</span><span class="tag">aiohttp</span><span class="tag">PyMuPDF</span><span class="tag">Pydantic v2</span>
+          <span class="tag">Gemini API</span><span class="tag">LLM API Integration</span><span class="tag">Aiogram 3</span><span class="tag">aiohttp</span><span class="tag">PyMuPDF</span><span class="tag">Pydantic v2</span>
         </div>
       </div>
       <div class="glass-card p-6">
@@ -179,7 +228,7 @@
           <span class="font-semibold" style="color:var(--text)" data-i18n="skills_infra">Testing & DevOps</span>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:7px">
-          <span class="tag">pytest</span><span class="tag">Docker</span><span class="tag">Git / GitHub</span><span class="tag">Linux</span><span class="tag">Uvicorn</span><span class="tag">WSGI</span><span class="tag">Onrender</span>
+          <span class="tag">pytest</span><span class="tag">Docker</span><span class="tag">Git / GitHub</span><span class="tag">Linux</span><span class="tag">Uvicorn</span><span class="tag">Gunicorn</span><span class="tag">WSGI</span><span class="tag">Render</span><span class="tag">Flask-Migrate</span>
         </div>
       </div>
       <div class="glass-card p-6">
@@ -203,6 +252,23 @@
       <div class="tl-item">
         <div class="tl-dot" style="background:var(--accent)"></div>
         <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px">
+          <h3 class="font-bold text-xl" style="color:var(--text)" data-i18n="gb_title">Python Backend Developer</h3>
+          <span class="mono px-3 py-1 rounded" style="font-size:11px;background:var(--accent-glow);color:var(--accent);border:1px solid rgba(61,219,168,0.2);white-space:nowrap">2026 · <span data-i18n="gb_live">Live</span></span>
+        </div>
+        <p class="mono mb-4" style="font-size:12px;color:var(--muted)" data-i18n="gb_company">G&amp;B Beauty · Freelance / Contract · Pavia, Italy</p>
+        <ul style="list-style:none;padding:0;color:var(--muted);font-size:15px;line-height:1.65">
+          <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="gb_b1">Built and deployed a live salon booking platform with multilingual pages, service catalog, specialist schedules, and appointment booking.</span></li>
+          <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="gb_b2">Implemented customer accounts, booking history, an admin dashboard, and REST endpoints for availability and schedules.</span></li>
+          <li style="display:flex;gap:9px"><span class="bullet">▸</span><span data-i18n="gb_b3">Added database migrations, authentication, and CSRF protection with Flask, SQLAlchemy 2, and PostgreSQL; deployed with Gunicorn on Render.</span></li>
+        </ul>
+        <div style="display:flex;gap:20px;margin-top:14px;flex-wrap:wrap">
+          <a href="https://gb-beauty.onrender.com" target="_blank" rel="noopener noreferrer" class="mono" style="font-size:12px;color:var(--accent);text-decoration:none" data-i18n="gb_live_link">↗ Live App</a>
+          <a href="project.html?id=gb-beauty" class="mono" style="font-size:12px;color:var(--muted);text-decoration:none" data-i18n="gb_details">View Details →</a>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--accent)"></div>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px">
           <h3 class="font-bold text-xl" style="color:var(--text)" data-i18n="exp1_title">Freelance Backend Developer</h3>
           <span class="mono px-3 py-1 rounded" style="font-size:11px;background:var(--accent-glow);color:var(--accent);border:1px solid rgba(61,219,168,0.2);white-space:nowrap">2025 — 2026</span>
         </div>
@@ -210,7 +276,7 @@
         <ul style="list-style:none;padding:0;color:var(--muted);font-size:15px;line-height:1.65">
           <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="exp1_b1">Architected and independently delivered a production-grade B2B trading platform from database design to live deployment.</span></li>
           <li style="display:flex;gap:9px;margin-bottom:6px"><span class="bullet">▸</span><span data-i18n="exp1_b2">Reduced manual catalog-update time by 85% by implementing WSGI-based server configuration and structuring scalable data models.</span></li>
-          <li style="display:flex;gap:9px"><span class="bullet">▸</span><span data-i18n="exp1_b3">Utilized Flask, Jinja2, and SQLite, deploying the final system to Onrender.</span></li>
+          <li style="display:flex;gap:9px"><span class="bullet">▸</span><span data-i18n="exp1_b3">Utilized Flask, Jinja2, and SQLite, deploying the final system to Render.</span></li>
         </ul>
         <div style="display:flex;gap:20px;margin-top:14px;flex-wrap:wrap">
           <a href="https://maele-source.onrender.com" target="_blank" class="mono" style="font-size:12px;color:var(--accent);text-decoration:none" data-i18n="exp1_live">↗ Live App</a>
@@ -221,7 +287,7 @@
         <div class="tl-dot" style="background:var(--dim)"></div>
         <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px">
           <h3 class="font-bold text-xl" style="color:var(--text)" data-i18n="exp2_title">Python Automation Engineer</h3>
-          <span class="mono px-3 py-1 rounded" style="font-size:11px;background:rgba(100,112,136,.1);color:var(--muted);white-space:nowrap">2024</span>
+          <span class="mono px-3 py-1 rounded" style="font-size:11px;background:rgba(100,112,136,.1);color:var(--muted);white-space:nowrap">2023</span>
         </div>
         <p class="mono mb-4" style="font-size:12px;color:var(--muted)" data-i18n="exp2_company">Logistics Data Solutions · Freelance / Contract</p>
         <ul style="list-style:none;padding:0;color:var(--muted);font-size:15px;line-height:1.65">
@@ -267,6 +333,22 @@
     <h2 class="font-bold text-3xl mb-10" style="color:var(--text)" data-i18n="proj_title">Featured Projects</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
       
+      <a href="project.html?id=harvestops" class="term-card">
+        <div class="term-hdr">
+          <span class="mac-dot" style="background:#ff5f57"></span><span class="mac-dot" style="background:#febc2e"></span><span class="mac-dot" style="background:#28c840"></span>
+          <span class="mono" style="font-size:12px;color:var(--muted);margin-left:8px">harvestops/</span>
+          <span class="mono" style="font-size:10px;color:var(--amber);margin-left:auto" data-i18n="harvest_status">IN PROGRESS</span>
+        </div>
+        <div class="term-body">
+          <p class="prompt mb-3">cat README.md</p>
+          <h3 class="font-bold text-xl mb-2" style="color:var(--text)" data-i18n="harvest_title">HarvestOps — ML Crop-Yield Risk Platform</h3>
+          <p style="font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:20px" data-i18n="harvest_desc">University project in progress: a prototype for regional crop-yield risk classification using agriculture, weather, soil, and satellite indicators. Kafka event flow is planned, not yet implemented.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Apache Kafka · planned</span>
+          </div>
+        </div>
+      </a>
+
       <a href="project.html?id=url-shortener" class="term-card">
         <div class="term-hdr">
           <span class="mac-dot" style="background:#ff5f57"></span>
@@ -285,20 +367,20 @@
         </div>
       </a>
 
-      <a href="project.html?id=stripe-ecommerce" class="term-card">
+      <a href="project.html?id=django-jwt-api" class="term-card">
         <div class="term-hdr">
           <span class="mac-dot" style="background:#ff5f57"></span>
           <span class="mac-dot" style="background:#febc2e"></span>
           <span class="mac-dot" style="background:#28c840"></span>
-          <span class="mono" style="font-size:12px;color:var(--muted);margin-left:8px">stripe_test_task/</span>
+          <span class="mono" style="font-size:12px;color:var(--muted);margin-left:8px">django_api/</span>
           <i data-feather="arrow-right" style="width:14px;height:14px;color:var(--muted);margin-left:auto"></i>
         </div>
         <div class="term-body">
           <p class="prompt mb-3">cat README.md</p>
-          <h3 class="font-bold text-xl mb-2" style="color:var(--text)" data-i18n="proj4_title">Stripe E-Commerce</h3>
-          <p style="font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:20px" data-i18n="proj4_desc">Django-based shop application integrating the Stripe API for end-to-end payment processing. Configured for production deployment using Docker, Gunicorn, and Whitenoise.</p>
+          <h3 class="font-bold text-xl mb-2" style="color:var(--text)" data-i18n="proj4_title">Django REST API — JWT Authentication</h3>
+          <p style="font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:20px" data-i18n="proj4_desc">Django REST Framework API backed by PostgreSQL, with JWT authentication and password hashing.</p>
           <div style="display:flex;flex-wrap:wrap;gap:6px">
-            <span class="tag">Django</span><span class="tag">Stripe API</span><span class="tag">Docker</span><span class="tag">Gunicorn</span>
+            <span class="tag">Django 5</span><span class="tag">DRF</span><span class="tag">PostgreSQL</span><span class="tag">PyJWT</span><span class="tag">bcrypt</span>
           </div>
         </div>
       </a>
@@ -439,9 +521,9 @@
 feather.replace();
 
 const PHRASES = {
-  en: ['Python Backend Developer.','API Architect.','Automation Engineer.','Microservices Builder.'],
-  ru: ['Python Backend Developer.','Архитектор API.','Инженер автоматизации.','Разработчик микросервисов.'],
-  it: ['Python Backend Developer.','Architetto API.','Ingegnere di Automazione.','Sviluppatore Microservizi.']
+  en: ['Python Backend Developer.','AI Integrations Developer.','API Engineer.','Automation Engineer.'],
+  ru: ['Python Backend Developer.','Разработчик AI-интеграций.','Инженер API.','Инженер автоматизации.'],
+  it: ['Python Backend Developer.','Sviluppatore di integrazioni AI.','Ingegnere API.','Ingegnere di automazione.']
 };
 
 const T = {
@@ -453,11 +535,16 @@ const T = {
     skills_backend:'Backend', skills_databases:'Databases', skills_auth:'Auth & Security',
     skills_ai:'AI & Async', skills_infra:'Testing & DevOps', skills_concepts:'Concepts & Business',
     exp_eyebrow:'$ git log --oneline career', exp_title:'Work Experience',
+    gb_title:'Python Backend Developer', gb_live:'LIVE IN PRODUCTION', gb_company:'G&B Beauty · Freelance / Contract · Pavia, Italy',
+    gb_b1:'Built and deployed a live salon booking platform with multilingual pages, service catalog, specialist schedules, and appointment booking.',
+    gb_b2:'Implemented customer accounts, booking history, an admin dashboard, and REST endpoints for availability and schedules.',
+    gb_b3:'Added database migrations, authentication, and CSRF protection with Flask, SQLAlchemy 2, and PostgreSQL; deployed with Gunicorn on Render.',
+    gb_live_link:'↗ Live App', gb_details:'View Details →',
     
     exp1_title:'Freelance Backend Developer', exp1_company:'Maele Source · Freelance B2B · Italy',
     exp1_b1:'Architected and independently delivered a production-grade B2B trading platform from database design to live deployment.',
     exp1_b2:'Reduced manual catalog-update time by 85% by implementing WSGI-based server configuration and structuring scalable data models.',
-    exp1_b3:'Utilized Flask, Jinja2, and SQLite, deploying the final system to Onrender.',
+    exp1_b3:'Utilized Flask, Jinja2, and SQLite, deploying the final system to Render.',
     exp1_live:'↗ Live App', exp1_details:'View Details →',
     
     exp2_title:'Python Automation Engineer', exp2_company:'Logistics Data Solutions · Freelance / Contract',
@@ -477,14 +564,16 @@ const T = {
     exp4_b3:'Engineered REST middleware to decouple manual processes into automated, API-driven services.',
     
     proj_eyebrow:'$ ls -la projects/', proj_title:'Featured Projects',
+    harvest_status:'IN PROGRESS', harvest_title:'HarvestOps — ML Crop-Yield Risk Platform',
+    harvest_desc:'University project in progress: a prototype for regional crop-yield risk classification using agriculture, weather, soil, and satellite indicators. Kafka event flow is planned, not yet implemented.',
     proj1_title:'Study Bot',
     proj1_desc:'AI Telegram assistant: FastAPI microservice + Aiogram 3 bot. Accepts lecture PDFs, extracts text via PyMuPDF, and returns structured summaries via Gemini API.',
     proj2_title:'Pet App',
     proj2_desc:'Cross-platform mobile app for pet owners. Tinder-style swipe mechanics, real-time matching, and live chat powered by Firebase RT DB. Multi-screen Kivy architecture.',
     proj3_title:'URL Shortener API',
     proj3_desc:'REST API microservice exposing endpoints for link creation, redirect resolution, and click statistics. Containerized with Docker and validated with a comprehensive pytest suite.',
-    proj4_title:'Stripe E-Commerce',
-    proj4_desc:'Django-based shop application integrating the Stripe API for end-to-end payment processing. Configured for production deployment using Docker, Gunicorn, and Whitenoise.',
+    proj4_title:'Django REST API — JWT Authentication',
+    proj4_desc:'Django REST Framework API backed by PostgreSQL, with JWT authentication and password hashing.',
     
     edu_eyebrow:'$ cat education.json', edu_title:'Education & Languages',
     edu_degree:'BSc Artificial Intelligence', edu_uni:'University of Pavia, Italy', edu_expected:'expected',
@@ -502,11 +591,16 @@ const T = {
     skills_backend:'Backend', skills_databases:'Базы данных', skills_auth:'Безопасность',
     skills_ai:'ИИ и асинхронность', skills_infra:'Тестирование и DevOps', skills_concepts:'Концепции и бизнес',
     exp_eyebrow:'$ git log --oneline career', exp_title:'Опыт работы',
+    gb_title:'Python Backend Developer', gb_live:'В ПРОДАКШЕНЕ', gb_company:'G&B Beauty · Фриланс / контракт · Павия, Италия',
+    gb_b1:'Разработал и запустил рабочую платформу онлайн-записи в салон: мультиязычные страницы, каталог услуг, специалисты, расписание и бронирование.',
+    gb_b2:'Реализовал аккаунты клиентов, историю записей, административную панель и REST-эндпоинты доступности и расписания.',
+    gb_b3:'Настроил миграции базы данных, аутентификацию и CSRF-защиту на Flask, SQLAlchemy 2 и PostgreSQL; развернул приложение с Gunicorn на Render.',
+    gb_live_link:'↗ Открыть сайт', gb_details:'Подробнее →',
     
     exp1_title:'Freelance Backend Developer', exp1_company:'Maele Source · Фриланс B2B · Италия',
     exp1_b1:'Спроектировал и запустил B2B платформу от архитектуры БД до production-деплоя.',
     exp1_b2:'Сократил время ручного обновления каталога на 85%, внедрив конфигурацию WSGI и масштабируемые модели данных.',
-    exp1_b3:'Реализовал проект на Flask, Jinja2 и SQLite, настроив деплой на Onrender.',
+    exp1_b3:'Реализовал проект на Flask, Jinja2 и SQLite, настроив деплой на Render.',
     exp1_live:'↗ Live App', exp1_details:'Подробнее →',
     
     exp2_title:'Python Automation Engineer', exp2_company:'Logistics Data Solutions · Фриланс / Контракт',
@@ -526,14 +620,16 @@ const T = {
     exp4_b3:'Создал REST middleware для перевода ручных процессов продаж в автоматизированные API-сервисы.',
     
     proj_eyebrow:'$ ls -la projects/', proj_title:'Ключевые проекты',
+    harvest_status:'В РАЗРАБОТКЕ', harvest_title:'HarvestOps — ML-платформа оценки рисков урожайности',
+    harvest_desc:'Курсовой проект в разработке: прототип классификации региональных рисков урожайности по сельскохозяйственным, погодным, почвенным и спутниковым показателям. Поток событий Kafka запланирован, но пока не реализован.',
     proj1_title:'Study Bot',
     proj1_desc:'ИИ-ассистент в Telegram: FastAPI-микросервис + Aiogram 3 бот. Принимает PDF-лекции, извлекает текст через PyMuPDF и возвращает конспекты через Gemini API.',
     proj2_title:'Pet App',
     proj2_desc:'Кроссплатформенное мобильное приложение для владельцев питомцев. Свайпы в стиле Tinder, матчинг в реальном времени и чат на Firebase RT DB. Архитектура Kivy.',
     proj3_title:'URL Shortener API',
     proj3_desc:'REST API микросервис для создания ссылок и сбора статистики кликов. Упакован в Docker и протестирован комплексным набором автотестов на pytest.',
-    proj4_title:'Stripe E-Commerce',
-    proj4_desc:'Django-приложение магазина с интеграцией Stripe API для проведения платежей. Настроено для production-развертывания с использованием Docker, Gunicorn и Whitenoise.',
+    proj4_title:'Django REST API — JWT-аутентификация',
+    proj4_desc:'API на Django REST Framework и PostgreSQL с JWT-аутентификацией и хешированием паролей.',
     
     edu_eyebrow:'$ cat education.json', edu_title:'Образование и языки',
     edu_degree:'BSc Искусственный интеллект', edu_uni:'Университет Павии, Италия', edu_expected:'ожидается',
@@ -551,11 +647,16 @@ const T = {
     skills_backend:'Backend', skills_databases:'Database', skills_auth:'Sicurezza',
     skills_ai:'AI e Async', skills_infra:'Testing e DevOps', skills_concepts:'Concetti e Business',
     exp_eyebrow:'$ git log --oneline career', exp_title:'Esperienza Lavorativa',
+    gb_title:'Python Backend Developer', gb_live:'IN PRODUZIONE', gb_company:'G&B Beauty · Freelance / Contratto · Pavia, Italia',
+    gb_b1:'Realizzata e pubblicata una piattaforma live per prenotazioni in salone con pagine multilingue, catalogo servizi, specialisti e orari.',
+    gb_b2:'Implementati account clienti, storico prenotazioni, dashboard amministrativa ed endpoint REST per disponibilità e orari.',
+    gb_b3:'Aggiunte migrazioni database, autenticazione e protezione CSRF con Flask, SQLAlchemy 2 e PostgreSQL; deploy con Gunicorn su Render.',
+    gb_live_link:'↗ App Live', gb_details:'Dettagli →',
     
     exp1_title:'Sviluppatore Backend Freelance', exp1_company:'Maele Source · Freelance B2B · Italia',
     exp1_b1:'Progettata e rilasciata in modo indipendente una piattaforma B2B dall\'architettura del DB al deploy in produzione.',
     exp1_b2:'Ridotto del 85% il tempo di aggiornamento del catalogo implementando WSGI e modelli di dati scalabili.',
-    exp1_b3:'Utilizzato Flask, Jinja2 e SQLite, deployando il sistema finale su Onrender.',
+    exp1_b3:'Utilizzato Flask, Jinja2 e SQLite, deployando il sistema finale su Render.',
     exp1_live:'↗ App Live', exp1_details:'Dettagli →',
     
     exp2_title:'Ingegnere di Automazione Python', exp2_company:'Logistics Data Solutions · Freelance / Contratto',
@@ -575,14 +676,16 @@ const T = {
     exp4_b3:'Sviluppato middleware REST per trasformare i processi manuali in servizi automatizzati API-driven.',
     
     proj_eyebrow:'$ ls -la projects/', proj_title:'Progetti in Evidenza',
+    harvest_status:'IN CORSO', harvest_title:'HarvestOps — Piattaforma ML per il rischio dei raccolti',
+    harvest_desc:'Progetto universitario in corso: prototipo per classificare il rischio di resa agricola regionale usando indicatori agricoli, meteo, del suolo e satellitari. Il flusso di eventi Kafka è pianificato, non ancora implementato.',
     proj1_title:'Study Bot',
     proj1_desc:'Assistente IA Telegram: microservizio FastAPI + bot Aiogram 3. Accetta PDF, estrae testo via PyMuPDF e restituisce riassunti tramite Gemini API.',
     proj2_title:'Pet App',
     proj2_desc:'App mobile per proprietari di animali. Swipe stile Tinder, matching e chat live tramite Firebase RT DB. Architettura Kivy.',
     proj3_title:'URL Shortener API',
     proj3_desc:'Microservizio REST API per la creazione di link e statistiche sui click. Containerizzato con Docker e validato con una suite pytest.',
-    proj4_title:'Stripe E-Commerce',
-    proj4_desc:'App shop Django con integrazione Stripe API per l\'elaborazione dei pagamenti. Configurato per la produzione con Docker, Gunicorn e Whitenoise.',
+    proj4_title:'Django REST API — Autenticazione JWT',
+    proj4_desc:'API Django REST Framework con PostgreSQL, autenticazione JWT e hashing delle password.',
     
     edu_eyebrow:'$ cat education.json', edu_title:'Formazione e Lingue',
     edu_degree:'Laurea in Intelligenza Artificiale', edu_uni:'Università di Pavia, Italy', edu_expected:'previsto',
@@ -595,9 +698,9 @@ const T = {
 };
 
 const BIO = {
-  en: 'Python Backend Developer specializing in business-process automation, CRM system integration, and building scalable REST APIs. I architect end-to-end solutions from database design to production deployment. Based in <span style="color:var(--text)">Pavia, Italy.</span>',
-  ru: 'Python backend-разработчик, специализирующийся на автоматизации бизнес-процессов, интеграции CRM и создании REST API. Проектирую масштабируемые решения от структуры БД до production-деплоя. Нахожусь в <span style="color:var(--text)">Павии, Италия.</span>',
-  it: 'Sviluppatore Python Backend specializzato nell\'automazione dei processi aziendali, integrazione CRM e creazione di API REST. Progetto soluzioni complete, dal design del database al deploy in produzione. Basato a <span style="color:var(--text)">Pavia, Italy.</span>'
+  en: 'Python backend developer and Artificial Intelligence student at the University of Pavia. I build web applications, REST APIs, automation pipelines, and AI integrations with Flask, FastAPI, Django REST Framework, and PostgreSQL. Based in <span style="color:var(--text)">Pavia, Italy.</span>',
+  ru: 'Python backend-разработчик и студент программы Artificial Intelligence в Университете Павии. Создаю веб-приложения, REST API, пайплайны автоматизации и интеграции с ИИ на Flask, FastAPI, Django REST Framework и PostgreSQL. Живу в <span style="color:var(--text)">Павии, Италия.</span>',
+  it: 'Sviluppatore backend Python e studente di Artificial Intelligence all’Università di Pavia. Realizzo applicazioni web, API REST, pipeline di automazione e integrazioni AI con Flask, FastAPI, Django REST Framework e PostgreSQL. Vivo a <span style="color:var(--text)">Pavia, Italia.</span>'
 };
 
 let currentLang = localStorage.getItem('ks_lang') || 'en';
@@ -646,6 +749,11 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.07 });
 document.querySelectorAll('.sr').forEach(el => io.observe(el));
+document.querySelectorAll('.tl-item, #skills .glass-card, #projects .term-card, #education .glass-card').forEach((el, index) => {
+  el.classList.add('reveal');
+  el.dataset.delay = String(index % 5);
+  io.observe(el);
+});
 </script>
 </body>
 </html>

@@ -19,6 +19,15 @@
     .btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:13px;text-decoration:none;transition:color 0.2s;}
     .btn-ghost:hover{color:var(--text);}
     .bullet{color:var(--accent);flex-shrink:0;margin-right:8px;}
+    #content:not(.hidden) .term-card{animation:project-enter .7s cubic-bezier(.2,.75,.25,1) both;}
+    #content:not(.hidden) #tech-stack{animation:project-enter .6s .12s cubic-bezier(.2,.75,.25,1) both;}
+    #content:not(.hidden) #title{animation:project-enter .65s .2s cubic-bezier(.2,.75,.25,1) both;}
+    #content:not(.hidden) #desc{animation:project-enter .65s .3s cubic-bezier(.2,.75,.25,1) both;}
+    #links a{transition:transform .2s,border-color .2s,background-color .2s;}
+    #links a:hover{transform:translateY(-3px);}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;}
+    @keyframes project-enter{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}}
     
     .lang-switcher{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:3px;}
     .lang-btn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 9px;border-radius:4px;transition:all 0.18s;letter-spacing:0.04em;}
@@ -89,6 +98,132 @@
     };
 
     const data = {
+        "harvestops": {
+            file: "harvestops/",
+            en: {
+                title: "HarvestOps — ML Crop-Yield Risk Platform",
+                tech: "> Python / scikit-learn / FastAPI / Kafka (planned)",
+                desc: "University coursework project in progress at the University of Pavia. The goal is to prototype regional crop-yield risk classification from open agriculture, weather, soil, and satellite indicators. Kafka is part of the proposed event-driven design and has not yet been implemented.",
+                features: [
+                    "Defining below-normal, near-normal, and above-normal yield classes using the CY-Bench benchmark and open indicators.",
+                    "Planning a comparison of Logistic Regression, Decision Tree, Random Forest, and XGBoost models against a baseline.",
+                    "Designing a leave-one-year-out evaluation using macro-F1 and balanced accuracy to assess performance across years.",
+                    "Proposing a FastAPI service and dashboard, with a Telegram interface for text or voice requests and alerts.",
+                    "Planning Kafka events for data refreshes, forecast updates, and notifications; the broker integration is future work."
+                ],
+                tags: ["Python", "scikit-learn", "FastAPI", "PostgreSQL", "Apache Kafka (planned)", "Docker (planned)"],
+                links: []
+            },
+            ru: {
+                title: "HarvestOps — ML-платформа оценки рисков урожайности",
+                tech: "> Python / scikit-learn / FastAPI / Kafka (запланирован)",
+                desc: "Курсовой проект в разработке в Университете Павии. Цель — создать прототип классификации региональных рисков урожайности на основе открытых сельскохозяйственных, погодных, почвенных и спутниковых показателей. Kafka входит в предлагаемую событийную архитектуру, интеграция пока не реализована.",
+                features: [
+                    "Определяются классы урожайности: ниже нормы, около нормы и выше нормы; в качестве ориентира используется CY-Bench и открытые показатели.",
+                    "Планируется сравнить Logistic Regression, Decision Tree, Random Forest и XGBoost с базовой моделью.",
+                    "Проектируется проверка leave-one-year-out с метриками macro-F1 и balanced accuracy для оценки качества на разных годах.",
+                    "В проектируемое решение входят FastAPI-сервис и дашборд, а также Telegram-интерфейс для текстовых и голосовых запросов и уведомлений.",
+                    "В плане — Kafka-события для обновления данных, прогнозов и уведомлений; интеграция брокера относится к будущей работе."
+                ],
+                tags: ["Python", "scikit-learn", "FastAPI", "PostgreSQL", "Apache Kafka (запланирован)", "Docker (запланирован)"],
+                links: []
+            },
+            it: {
+                title: "HarvestOps — Piattaforma ML per il rischio dei raccolti",
+                tech: "> Python / scikit-learn / FastAPI / Kafka (pianificato)",
+                desc: "Progetto universitario in corso all’Università di Pavia. L’obiettivo è prototipare la classificazione del rischio di resa agricola regionale usando indicatori aperti di agricoltura, meteo, suolo e satellite. Kafka fa parte dell’architettura event-driven proposta, ma non è ancora stato implementato.",
+                features: [
+                    "Definizione delle classi di resa sotto la norma, nella norma e sopra la norma usando CY-Bench e indicatori aperti.",
+                    "Confronto pianificato tra Logistic Regression, Decision Tree, Random Forest e XGBoost rispetto a un baseline.",
+                    "Valutazione progettata leave-one-year-out con macro-F1 e balanced accuracy per misurare le prestazioni tra gli anni.",
+                    "Proposta di un servizio FastAPI e dashboard con interfaccia Telegram per richieste testuali o vocali e avvisi.",
+                    "Pianificazione di eventi Kafka per aggiornamenti di dati, previsioni e notifiche; l’integrazione del broker è lavoro futuro."
+                ],
+                tags: ["Python", "scikit-learn", "FastAPI", "PostgreSQL", "Apache Kafka (pianificato)", "Docker (pianificato)"],
+                links: []
+            }
+        },
+        "gb-beauty": {
+            file: "gb_beauty/",
+            en: {
+                title: "G&B Beauty — Live Salon Booking Platform",
+                tech: "> Flask / SQLAlchemy 2 / PostgreSQL / Gunicorn",
+                desc: "A live booking platform built for a beauty salon in Pavia, Italy. Customers can browse services, specialists and availability, then manage upcoming and past appointments through an account.",
+                features: [
+                    "Built a multilingual salon website with a service catalog and appointment-booking flow.",
+                    "Implemented REST endpoints for specialist schedules and availability, plus customer accounts and booking history.",
+                    "Created an admin dashboard for managing salon content and appointments.",
+                    "Added database migrations, login, and CSRF protection; deployed the production application with Gunicorn on Render."
+                ],
+                tags: ["Flask", "SQLAlchemy 2", "PostgreSQL", "REST API", "Gunicorn", "Render", "Flask-Migrate"],
+                links: [{ label: "Live Application", url: "https://gb-beauty.onrender.com", icon: "external-link" }]
+            },
+            ru: {
+                title: "G&B Beauty — работающая платформа записи в салон",
+                tech: "> Flask / SQLAlchemy 2 / PostgreSQL / Gunicorn",
+                desc: "Работающая платформа онлайн-записи для салона красоты в Павии. Клиенты просматривают услуги, специалистов и свободное время, записываются и управляют предстоящими и прошедшими визитами через личный кабинет.",
+                features: [
+                    "Создал мультиязычный сайт салона с каталогом услуг и процессом онлайн-записи.",
+                    "Реализовал REST-эндпоинты расписания специалистов и доступности, аккаунты клиентов и историю записей.",
+                    "Разработал административную панель для управления контентом и записями.",
+                    "Настроил миграции базы данных, вход и CSRF-защиту; развернул production-приложение с Gunicorn на Render."
+                ],
+                tags: ["Flask", "SQLAlchemy 2", "PostgreSQL", "REST API", "Gunicorn", "Render", "Flask-Migrate"],
+                links: [{ label: "Открыть сайт", url: "https://gb-beauty.onrender.com", icon: "external-link" }]
+            },
+            it: {
+                title: "G&B Beauty — Piattaforma live per prenotazioni",
+                tech: "> Flask / SQLAlchemy 2 / PostgreSQL / Gunicorn",
+                desc: "Piattaforma di prenotazione live realizzata per un salone di bellezza a Pavia. I clienti possono consultare servizi, specialisti e disponibilità, prenotare e gestire appuntamenti futuri e passati dal proprio account.",
+                features: [
+                    "Realizzato un sito multilingue con catalogo dei servizi e flusso di prenotazione online.",
+                    "Implementati endpoint REST per orari e disponibilità degli specialisti, account clienti e storico prenotazioni.",
+                    "Creata una dashboard amministrativa per gestire contenuti e appuntamenti.",
+                    "Aggiunte migrazioni database, accesso e protezione CSRF; deploy dell’applicazione con Gunicorn su Render."
+                ],
+                tags: ["Flask", "SQLAlchemy 2", "PostgreSQL", "REST API", "Gunicorn", "Render", "Flask-Migrate"],
+                links: [{ label: "Apri applicazione", url: "https://gb-beauty.onrender.com", icon: "external-link" }]
+            }
+        },
+        "django-jwt-api": {
+            file: "django_api/",
+            en: {
+                title: "Django REST API — JWT Authentication",
+                tech: "> Django 5 / Django REST Framework / PostgreSQL",
+                desc: "A REST API project built with Django REST Framework and PostgreSQL, with token-based authentication and secure password hashing.",
+                features: [
+                    "Implemented API endpoints with Django REST Framework.",
+                    "Configured JWT authentication with PyJWT and bcrypt password hashing.",
+                    "Used PostgreSQL as the relational database."
+                ],
+                tags: ["Python", "Django 5", "Django REST Framework", "PostgreSQL", "PyJWT", "bcrypt"],
+                links: []
+            },
+            ru: {
+                title: "Django REST API — JWT-аутентификация",
+                tech: "> Django 5 / Django REST Framework / PostgreSQL",
+                desc: "REST API на Django REST Framework и PostgreSQL с токенной аутентификацией и безопасным хешированием паролей.",
+                features: [
+                    "Реализовал API-эндпоинты на Django REST Framework.",
+                    "Настроил JWT-аутентификацию с PyJWT и хеширование паролей через bcrypt.",
+                    "Использовал PostgreSQL в качестве реляционной базы данных."
+                ],
+                tags: ["Python", "Django 5", "Django REST Framework", "PostgreSQL", "PyJWT", "bcrypt"],
+                links: []
+            },
+            it: {
+                title: "Django REST API — Autenticazione JWT",
+                tech: "> Django 5 / Django REST Framework / PostgreSQL",
+                desc: "Progetto REST API basato su Django REST Framework e PostgreSQL, con autenticazione tramite token e hashing sicuro delle password.",
+                features: [
+                    "Implementati endpoint API con Django REST Framework.",
+                    "Configurata l’autenticazione JWT con PyJWT e l’hashing delle password con bcrypt.",
+                    "Utilizzato PostgreSQL come database relazionale."
+                ],
+                tags: ["Python", "Django 5", "Django REST Framework", "PostgreSQL", "PyJWT", "bcrypt"],
+                links: []
+            }
+        },
         "url-shortener": {
             file: "url_short_test.py",
             en: {
